@@ -4,12 +4,18 @@
   "position": "top",
   "spacing": 0,
   "height": 26,
-  "modules-left": ["custom/omarchy", "hyprland/workspaces"],
-  "modules-center": ["clock", "custom/update", "custom/screenrecording-indicator"],
+  "modules-left": ["custom/omarchy", "custom/cava"],
+  "modules-center": [
+    "clock",
+    "custom/update",
+    "hyprland/workspaces",
+    "custom/screenrecording-indicator"
+  ],
   "modules-right": [
     "group/tray-expander",
     "bluetooth",
     "network",
+    "backlight",
     "pulseaudio",
     "cpu",
     "battery"
@@ -51,7 +57,6 @@
     "signal": 7,
     "interval": 3600
   },
-
   "cpu": {
     "interval": 5,
     "format": "󰍛",
@@ -62,6 +67,10 @@
     "format-alt": "{:L%d %B W%V %Y}",
     "tooltip": false,
     "on-click-right": "omarchy-cmd-tzupdate"
+  },
+  "custom/cava": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/cava.sh"
   },
   "network": {
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
@@ -95,6 +104,7 @@
       "critical": 10
     }
   },
+
   "bluetooth": {
     "format": "",
     "format-disabled": "󰂲",
@@ -102,8 +112,16 @@
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "blueberry"
   },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "scroll-step": 5,
+    "tooltip-format": "Brightness: {percent}%",
+    "format-icons": ["🌑", "🌒", "🌓", "🌔", "🌕"],
+    "min-length": 5
+  },
   "pulseaudio": {
-    "format": "{icon}",
+    "format": "{volume}% {icon}",
     "on-click": "$TERMINAL --class=Wiremix -e wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
